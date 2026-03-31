@@ -1,6 +1,6 @@
 # Análisis Exploratorio de Indicadores de Salud y Factores Asociados a Enfermedades Cardíacas — BRFSS 2015
 
-![Dashboard](docs/screenshot.png)
+![Dashboard](assets/screenshot.png)
 
 ## Descripción
 
