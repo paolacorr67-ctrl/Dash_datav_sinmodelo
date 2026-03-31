@@ -111,3 +111,40 @@ body {
     background-color: #1e3a5f !important;
     color: #ffffff !important;
 }
+/* Dropdown texto visible en todas las versiones */
+.Select-value-label {
+    color: #cbd5e1 !important;
+}
+
+.Select-placeholder {
+    color: #94a3b8 !important;
+}
+
+.Select-input input {
+    color: #cbd5e1 !important;
+}
+
+.Select-menu-outer {
+    background-color: #0D1B2E !important;
+    border: 1px solid #1e3a5f !important;
+}
+
+.Select-option {
+    background-color: #0D1B2E !important;
+    color: #cbd5e1 !important;
+}
+
+.Select-option:hover, .Select-option.is-focused {
+    background-color: #162032 !important;
+    color: #ffffff !important;
+}
+
+.Select-option.is-selected {
+    background-color: #1e3a5f !important;
+    color: #ffffff !important;
+}
+
+.Select-control {
+    background-color: #0D1B2E !important;
+    border-color: #1e3a5f !important;
+}
