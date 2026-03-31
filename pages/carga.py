@@ -10,46 +10,31 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 df = pd.read_csv(os.path.join(BASE_DIR, "docs", "heart_disease_health_indicators_BRFSS2015.csv"))
 
 TITLE_STYLE = {
-    "color": "#ffffff",
-    "fontWeight": "800",
-    "fontSize": "1.6rem",
-    "borderLeft": "6px solid #C0392B",
-    "paddingLeft": "14px",
-    "marginBottom": "0.5rem",
-    "fontFamily": "'Poppins', sans-serif"
+    "color": "#ffffff", "fontWeight": "800", "fontSize": "1.6rem",
+    "borderLeft": "6px solid #C0392B", "paddingLeft": "14px",
+    "marginBottom": "0.5rem", "fontFamily": "'Poppins', sans-serif"
 }
-
 SUBTITLE_STYLE = {
-    "color": "#94a3b8",
-    "fontSize": "0.9rem",
-    "fontFamily": "'Poppins', sans-serif",
-    "marginBottom": "1.5rem"
+    "color": "#94a3b8", "fontSize": "0.9rem",
+    "fontFamily": "'Poppins', sans-serif", "marginBottom": "1.5rem"
 }
-
 TEXT_STYLE = {
-    "color": "#cbd5e1",
-    "fontSize": "0.92rem",
-    "lineHeight": "1.8",
-    "fontFamily": "'Poppins', sans-serif",
-    "textAlign": "justify",
+    "color": "#cbd5e1", "fontSize": "0.92rem", "lineHeight": "1.8",
+    "fontFamily": "'Poppins', sans-serif", "textAlign": "justify",
 }
-
 TABLE_HEADER = {
-    "backgroundColor": "#162032",
-    "color": "#ffffff",
-    "fontWeight": "600",
-    "border": "1px solid #1e3a5f",
-    "fontFamily": "'Poppins', sans-serif",
-    "fontSize": "0.85rem"
+    "backgroundColor": "#162032", "color": "#ffffff", "fontWeight": "600",
+    "border": "1px solid #1e3a5f", "fontFamily": "'Poppins', sans-serif", "fontSize": "0.85rem"
+}
+TABLE_CELL = {
+    "backgroundColor": "#0D1B2E", "color": "#cbd5e1", "border": "1px solid #1e3a5f",
+    "padding": "10px 14px", "fontFamily": "'Poppins', sans-serif", "fontSize": "0.85rem"
 }
 
-TABLE_CELL = {
-    "backgroundColor": "#0D1B2E",
-    "color": "#cbd5e1",
-    "border": "1px solid #1e3a5f",
-    "padding": "10px 14px",
-    "fontFamily": "'Poppins', sans-serif",
-    "fontSize": "0.85rem"
+DD_STYLE = {
+    "backgroundColor": "#0D1B2E", "color": "#cbd5e1",
+    "border": "1px solid #1e3a5f", "borderRadius": "8px",
+    "fontFamily": "'Poppins', sans-serif", "fontSize": "0.88rem"
 }
 
 diccionario = [
@@ -81,7 +66,6 @@ tipos = ["Todos", "Objetivo", "Binaria", "Ordinal", "Continua"]
 
 layout = dbc.Container([
 
-    # Título
     dbc.Row([
         dbc.Col([
             html.H1("Carga y Estructura del Dataset", style=TITLE_STYLE),
@@ -89,134 +73,85 @@ layout = dbc.Container([
         ])
     ], className="mt-4"),
 
-    # Cards resumen
     dbc.Row([
         dbc.Col(dbc.Card(dbc.CardBody([
-            html.H3(f"{df.shape[0]:,}", style={
-                "color": "#FBF8F7", "fontWeight": "800",
+            html.H3(f"{df.shape[0]:,}", style={"color": "#C0392B", "fontWeight": "800",
                 "textAlign": "center", "fontFamily": "'Poppins', sans-serif"}),
-            html.P("filas", style={
-                "textAlign": "center", "color": "#ffffff",
+            html.P("filas", style={"textAlign": "center", "color": "#ffffff",
                 "fontSize": "0.85rem", "marginBottom": "0"})
         ]), style={"backgroundColor": "#0D1B2E", "border": "1px solid #1e3a5f",
             "borderRadius": "10px"}), md=4, className="mb-4"),
 
         dbc.Col(dbc.Card(dbc.CardBody([
-            html.H3(f"{df.shape[1]}", style={
-                "color": "#F9F8F8", "fontWeight": "800",
+            html.H3(f"{df.shape[1]}", style={"color": "#C0392B", "fontWeight": "800",
                 "textAlign": "center", "fontFamily": "'Poppins', sans-serif"}),
-            html.P("columnas", style={
-                "textAlign": "center", "color": "#ffffff",
+            html.P("columnas", style={"textAlign": "center", "color": "#ffffff",
                 "fontSize": "0.85rem", "marginBottom": "0"})
         ]), style={"backgroundColor": "#0D1B2E", "border": "1px solid #1e3a5f",
             "borderRadius": "10px"}), md=4, className="mb-4"),
 
-        
         dbc.Col(dbc.Card(dbc.CardBody([
-            html.H3("float64", style={
-                "color": "#FEFBFA", "fontWeight": "800",
+            html.H3("float64", style={"color": "#C0392B", "fontWeight": "800",
                 "textAlign": "center", "fontFamily": "'Poppins', sans-serif"}),
-            html.P("tipo de dato original", style={
-                "textAlign": "center", "color": "#ffffff",
+            html.P("tipo de dato original", style={"textAlign": "center", "color": "#ffffff",
                 "fontSize": "0.85rem", "marginBottom": "0"})
         ]), style={"backgroundColor": "#0D1B2E", "border": "1px solid #1e3a5f",
             "borderRadius": "10px"}), md=4, className="mb-4"),
     ]),
 
-    # Texto explicativo
     dbc.Row([
         dbc.Col([
-            html.P(
-                "El dataset cargado contiene 253.680 registros y 22 variables, resultado "
+            html.P("El dataset cargado contiene 253.680 registros y 22 variables, resultado "
                 "del proceso de limpieza y selección aplicado sobre el BRFSS 2015 original "
                 "de 441.456 filas y 330 columnas. De las 22 variables, 1 corresponde a la "
                 "variable objetivo (HeartDiseaseorAttack) y las 21 restantes representan "
-                "los factores de riesgo seleccionados.",
-                style=TEXT_STYLE
-            ),
-            html.P(
-                "El hecho de que todas sean float64 es solo el formato de almacenamiento, "
+                "los factores de riesgo seleccionados.", style=TEXT_STYLE),
+            html.P("El hecho de que todas sean float64 es solo el formato de almacenamiento, "
                 "no su naturaleza estadística. Clasificarlas correctamente es importante "
                 "porque determina qué tipo de visualizaciones y estadísticas aplicar en el EDA.",
-                style=TEXT_STYLE
-            ),
+                style=TEXT_STYLE),
         ])
     ], className="mb-4"),
 
     html.Hr(style={"borderColor": "#1e3a5f"}),
 
-    # Vista previa
     dbc.Row([
         dbc.Col([
-            html.H4("Vista previa del dataset", style={
-                "color": "#ffffff", "fontFamily": "'Poppins', sans-serif",
-                "fontWeight": "700", "marginBottom": "1rem"
-            }),
-            
-            html.P("¿Cuántas filas quieres explorar?", style={
-                "color": "#94a3b8",
-                "fontSize": "0.85rem",
-                "fontFamily": "'Poppins', sans-serif",
-                "marginBottom": "0.8rem"
-                }),
-            
-            
-            
-            
-            
-            
-            dcc.Slider(
-                id="slider-filas",
-                min=5, max=20, step=5, value=10,
-                marks={i: {"label": str(i), "style": {"color": "#94a3b8"}}
-                       for i in [5, 10, 15, 20]},
-                tooltip={"placement": "bottom", "always_visible": False}
-            ),
+            html.H4("Vista previa del dataset", style={"color": "#ffffff",
+                "fontFamily": "'Poppins', sans-serif", "fontWeight": "700", "marginBottom": "1rem"}),
+            html.P("¿Cuántas filas quieres explorar?", style={"color": "#94a3b8",
+                "fontSize": "0.85rem", "fontFamily": "'Poppins', sans-serif", "marginBottom": "0.8rem"}),
+            dcc.Slider(id="slider-filas", min=5, max=20, step=5, value=10,
+                marks={i: {"label": str(i), "style": {"color": "#94a3b8"}} for i in [5, 10, 15, 20]},
+                tooltip={"placement": "bottom", "always_visible": False}),
             html.Div(id="tabla-preview", style={"marginTop": "1.5rem"}),
         ])
     ], className="mb-5"),
 
     html.Hr(style={"borderColor": "#1e3a5f"}),
 
-    # Diccionario
     dbc.Row([
         dbc.Col([
-            html.H4("Diccionario de variables", style={
-                "color": "#ffffff", "fontFamily": "'Poppins', sans-serif",
-                "fontWeight": "700", "marginBottom": "1rem"
-            }),
-
+            html.H4("Diccionario de variables", style={"color": "#ffffff",
+                "fontFamily": "'Poppins', sans-serif", "fontWeight": "700", "marginBottom": "1rem"}),
             dbc.Row([
                 dbc.Col([
-                    html.Label("Filtrar por tipo:", style={
-                        "color": "#94a3b8", "fontSize": "0.85rem",
-                        "fontFamily": "'Poppins', sans-serif", "marginBottom": "0.3rem"
-                    }),
+                    html.Label("Filtrar por tipo:", style={"color": "#94a3b8", "fontSize": "0.85rem",
+                        "fontFamily": "'Poppins', sans-serif", "marginBottom": "0.3rem"}),
                     dcc.Dropdown(
                         id="dropdown-tipo",
                         options=[{"label": t, "value": t} for t in tipos],
                         value="Objetivo",
                         clearable=False,
-                        style={
-                            "backgroundColor": "#0D1B2E",
-                            "color": "#090101",
-                            "border": "1px solid #1e3a5f",
-                            "borderRadius": "8px",
-                            "fontFamily": "'Poppins', sans-serif",
-                            "fontSize": "0.88rem"
-                        }
+                        className="dark-dropdown",
+                        style=DD_STYLE
                     ),
                 ], md=4),
                 dbc.Col([
-                    html.Div(id="contador-variables", style={
-                        "color": "#929caa",
-                        "fontSize": "0.85rem",
-                        "fontFamily": "'Poppins', sans-serif",
-                        "marginTop": "2rem"
-                    })
+                    html.Div(id="contador-variables", style={"color": "#929caa",
+                        "fontSize": "0.85rem", "fontFamily": "'Poppins', sans-serif", "marginTop": "2rem"})
                 ], md=4),
             ], className="mb-3"),
-
             html.Div(id="tabla-diccionario"),
         ])
     ], className="mb-5"),
@@ -224,55 +159,35 @@ layout = dbc.Container([
 ], fluid=True, style={"padding": "2rem 3rem", "backgroundColor": "#070E1A"})
 
 
-@callback(
-    Output("tabla-preview", "children"),
-    Input("slider-filas", "value")
-)
+@callback(Output("tabla-preview", "children"), Input("slider-filas", "value"))
 def update_preview(n_filas):
     preview = df.head(n_filas).round(2)
     return dash_table.DataTable(
         data=preview.to_dict("records"),
         columns=[{"name": c, "id": c} for c in preview.columns],
         style_table={"overflowX": "auto", "borderRadius": "10px"},
-        style_header=TABLE_HEADER,
-        style_cell=TABLE_CELL,
-        style_data_conditional=[
-            {"if": {"row_index": "odd"}, "backgroundColor": "#111827"}
-        ],
+        style_header=TABLE_HEADER, style_cell=TABLE_CELL,
+        style_data_conditional=[{"if": {"row_index": "odd"}, "backgroundColor": "#111827"}],
         page_size=n_filas,
     )
 
 
-@callback(
-    Output("tabla-diccionario", "children"),
-    Output("contador-variables", "children"),
-    Input("dropdown-tipo", "value")
-)
+@callback(Output("tabla-diccionario", "children"), Output("contador-variables", "children"),
+          Input("dropdown-tipo", "value"))
 def update_diccionario(tipo):
-    if tipo == "Todos":
-        data = diccionario
-    else:
-        data = [d for d in diccionario if d["Tipo"] == tipo]
-
+    data = diccionario if tipo == "Todos" else [d for d in diccionario if d["Tipo"] == tipo]
     tabla = dash_table.DataTable(
         data=data,
-        columns=[
-            {"name": "Variable",    "id": "Variable"},
-            {"name": "Tipo",        "id": "Tipo"},
-            {"name": "Escala",      "id": "Escala"},
-            {"name": "Descripción", "id": "Descripción"},
-        ],
+        columns=[{"name": "Variable", "id": "Variable"}, {"name": "Tipo", "id": "Tipo"},
+                 {"name": "Escala", "id": "Escala"}, {"name": "Descripción", "id": "Descripción"}],
         style_table={"overflowX": "auto", "borderRadius": "10px"},
         style_header=TABLE_HEADER,
         style_cell={**TABLE_CELL, "whiteSpace": "normal", "height": "auto"},
         style_data_conditional=[
             {"if": {"row_index": "odd"}, "backgroundColor": "#111827"},
-            {"if": {"filter_query": '{Tipo} = "Objetivo"'},
-             "backgroundColor": "#1a2a4a",
-             "color": "#ffffff"},
+            {"if": {"filter_query": '{Tipo} = "Objetivo"'}, "backgroundColor": "#1a2a4a", "color": "#ffffff"},
         ],
         page_size=22,
     )
-
     contador = f"Mostrando {len(data)} variable{'s' if len(data) != 1 else ''}"
     return tabla, contador

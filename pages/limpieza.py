@@ -226,6 +226,7 @@ layout = dbc.Container([
                         options=[{"label": col, "value": col} for col in rangos.keys()],
                         value="HeartDiseaseorAttack",
                         clearable=False,
+                        className="dark-dropdown",
                         style={
                             "backgroundColor": "#0D1B2E",
                             "color": "#ffffff",
@@ -319,6 +320,7 @@ layout = dbc.Container([
                         options=[{"label": v, "value": v} for v in continuous_vars],
                         value="BMI",
                         clearable=False,
+                        className="dark-dropdown",
                         style={
                             "backgroundColor": "#0D1B2E",
                             "color": "#ffffff",

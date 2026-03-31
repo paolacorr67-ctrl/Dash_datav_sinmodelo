@@ -404,6 +404,7 @@ layout = dbc.Container([
                 options=[{"label": v, "value": v} for v in all_vars],
                 value="HighBP",
                 clearable=False,
+                className="dark-dropdown",
                 style=DROPDOWN_STYLE
             )
         ], md=5),
@@ -463,6 +464,7 @@ layout = dbc.Container([
                 options=[{"label": v, "value": v} for v in all_vars],
                 value="HighBP",
                 clearable=False,
+                className="dark-dropdown",
                 style=DROPDOWN_STYLE
             )
         ], md=5),
