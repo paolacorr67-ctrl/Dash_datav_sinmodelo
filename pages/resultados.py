@@ -35,7 +35,7 @@ PLOT_BASE = dict(
     margin=dict(t=50, b=50, l=50, r=30),
 )
 DROPDOWN_STYLE = {
-    "backgroundColor": "#0D1B2E", "color": "#ffffff",
+    "backgroundColor": "#0D1B2E",
     "border": "1px solid #1e3a5f", "borderRadius": "8px",
     "fontFamily": "'Poppins', sans-serif", "fontSize": "0.88rem"
 }

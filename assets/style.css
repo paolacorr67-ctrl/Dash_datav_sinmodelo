@@ -82,115 +82,72 @@ body {
     overflow: hidden !important;
 }
 /* Dropdown opciones oscuras */
-/* ── Dropdown fix universal ── */
-/* ── Dropdown fix completo ── */
-.Select-control,
-.Select-control:hover,
-.is-open .Select-control,
-.is-focused .Select-control,
-.is-focused:not(.is-open) .Select-control {
+/* ════════════════════════════════════════
+   DROPDOWN DARK — compatible Dash 2.x
+   ════════════════════════════════════════ */
+
+/* Control (cerrado) */
+.dark-dropdown .Select-control {
     background-color: #0D1B2E !important;
-    border-color: #1e3a5f !important;
+    border: 1px solid #1e3a5f !important;
     color: #cbd5e1 !important;
     box-shadow: none !important;
 }
 
-.Select-value,
-.Select-value-label {
-    color: #cbd5e1 !important;
-    background-color: #0D1B2E !important;
-}
-
-.Select-placeholder {
-    color: #94a3b8 !important;
-}
-
-.Select-input,
-.Select-input input {
-    color: #cbd5e1 !important;
-    background-color: transparent !important;
-}
-
-.Select-arrow {
-    border-color: #94a3b8 transparent transparent !important;
-}
-
-.Select-menu-outer,
-.Select-menu {
-    background-color: #0D1B2E !important;
-    border: 1px solid #1e3a5f !important;
+/* Valor seleccionado visible */
+.dark-dropdown .Select-value-label,
+.dark-dropdown .Select-single-value {
     color: #cbd5e1 !important;
 }
 
-.Select-option {
-    background-color: #0D1B2E !important;
-    color: #cbd5e1 !important;
-}
-
-.Select-option:hover,
-.Select-option.is-focused {
-    background-color: #162032 !important;
-    color: #ffffff !important;
-}
-
-.Select-option.is-selected {
-    background-color: #1e3a5f !important;
-    color: #ffffff !important;
-}
-
-.VirtualizedSelectOption {
-    background-color: #0D1B2E !important;
-    color: #cbd5e1 !important;
-}
-
-.VirtualizedSelectFocusedOption {
-    background-color: #162032 !important;
-    color: #ffffff !important;
-}
-
-/* Para versiones nuevas de Dash */
-.dash-dropdown > div {
-    background-color: #0D1B2E !important;
-    border-color: #1e3a5f !important;
-}
-
-.dash-dropdown input {
-    color: #cbd5e1 !important;
-}
-/* Fondo azul forzado en dropdown */
-.dark-dropdown .Select-control {
-    background-color: #0D1B2E !important;
-    border-color: #1e3a5f !important;
-}
-
-.dark-dropdown .Select-value-label {
-    color: #cbd5e1 !important;
-}
-
+/* Placeholder */
 .dark-dropdown .Select-placeholder {
     color: #94a3b8 !important;
 }
 
-.dark-dropdown input {
-    background-color: #0D1B2E !important;
+/* Input de búsqueda */
+.dark-dropdown .Select-input,
+.dark-dropdown .Select-input > input {
     color: #cbd5e1 !important;
-    opacity: 1 !important;
+    background-color: transparent !important;
+    caret-color: #cbd5e1 !important;
 }
 
+/* Flecha */
+.dark-dropdown .Select-arrow {
+    border-color: #94a3b8 transparent transparent !important;
+}
+.dark-dropdown .is-open .Select-arrow {
+    border-color: transparent transparent #94a3b8 !important;
+}
+
+/* ── MENÚ ABIERTO ── esto es lo que falla en Docker */
 .dark-dropdown .Select-menu-outer {
     background-color: #0D1B2E !important;
     border: 1px solid #1e3a5f !important;
+    border-top: none !important;
+    border-radius: 0 0 8px 8px !important;
+    z-index: 9999 !important;
 }
 
+.dark-dropdown .Select-menu {
+    background-color: #0D1B2E !important;
+    max-height: 250px !important;
+}
+
+/* Opciones */
 .dark-dropdown .Select-option {
     background-color: #0D1B2E !important;
     color: #cbd5e1 !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.88rem !important;
 }
 
 .dark-dropdown .Select-option:hover,
 .dark-dropdown .Select-option.is-focused {
     background-color: #162032 !important;
     color: #ffffff !important;
+    cursor: pointer !important;
 }
 
 .dark-dropdown .Select-option.is-selected {
@@ -198,6 +155,13 @@ body {
     color: #ffffff !important;
 }
 
-.dark-dropdown .Select-arrow {
-    border-color: #94a3b8 transparent transparent !important;
+/* VirtualizedSelect (para listas largas) */
+.dark-dropdown .VirtualizedSelectOption {
+    background-color: #0D1B2E !important;
+    color: #cbd5e1 !important;
+}
+
+.dark-dropdown .VirtualizedSelectFocusedOption {
+    background-color: #162032 !important;
+    color: #ffffff !important;
 }

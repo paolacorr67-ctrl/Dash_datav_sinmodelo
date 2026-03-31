@@ -32,7 +32,7 @@ TABLE_CELL = {
 }
 
 DD_STYLE = {
-    "backgroundColor": "#0D1B2E", "color": "#cbd5e1",
+    "backgroundColor": "#0D1B2E", 
     "border": "1px solid #1e3a5f", "borderRadius": "8px",
     "fontFamily": "'Poppins', sans-serif", "fontSize": "0.88rem"
 }

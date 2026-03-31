@@ -229,7 +229,7 @@ layout = dbc.Container([
                         className="dark-dropdown",
                         style={
                             "backgroundColor": "#0D1B2E",
-                            "color": "#ffffff",
+                            
                             "border": "1px solid #1e3a5f",
                             "borderRadius": "8px",
                             "fontFamily": "'Poppins', sans-serif",
@@ -250,7 +250,7 @@ layout = dbc.Container([
     dbc.Row([
         dbc.Col([
             html.H4("Análisis de datos atípicos", style={
-                "color": "#ffffff", "fontFamily": "'Poppins', sans-serif",
+                "fontFamily": "'Poppins', sans-serif",
                 "fontWeight": "700", "marginBottom": "0.4rem"
             }),
             html.P(
