@@ -321,14 +321,7 @@ layout = dbc.Container([
                         value="BMI",
                         clearable=False,
                         className="dark-dropdown",
-                        style={
-                            "backgroundColor": "#0D1B2E",
-                            "color": "#ffffff",
-                            "border": "1px solid #1e3a5f",
-                            "borderRadius": "8px",
-                            "fontFamily": "'Poppins', sans-serif",
-                            "fontSize": "0.88rem"
-                        }
+                        
                     ),
                 ], md=4),
             ], className="mb-3"),
