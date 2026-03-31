@@ -75,7 +75,7 @@ layout = dbc.Container([
 
     dbc.Row([
         dbc.Col(dbc.Card(dbc.CardBody([
-            html.H3(f"{df.shape[0]:,}", style={"color": "#C0392B", "fontWeight": "800",
+            html.H3(f"{df.shape[0]:,}", style={"color": "#FCFCFC", "fontWeight": "800",
                 "textAlign": "center", "fontFamily": "'Poppins', sans-serif"}),
             html.P("filas", style={"textAlign": "center", "color": "#ffffff",
                 "fontSize": "0.85rem", "marginBottom": "0"})
@@ -83,7 +83,7 @@ layout = dbc.Container([
             "borderRadius": "10px"}), md=4, className="mb-4"),
 
         dbc.Col(dbc.Card(dbc.CardBody([
-            html.H3(f"{df.shape[1]}", style={"color": "#C0392B", "fontWeight": "800",
+            html.H3(f"{df.shape[1]}", style={"color": "#FDF8F7", "fontWeight": "800",
                 "textAlign": "center", "fontFamily": "'Poppins', sans-serif"}),
             html.P("columnas", style={"textAlign": "center", "color": "#ffffff",
                 "fontSize": "0.85rem", "marginBottom": "0"})
@@ -91,7 +91,7 @@ layout = dbc.Container([
             "borderRadius": "10px"}), md=4, className="mb-4"),
 
         dbc.Col(dbc.Card(dbc.CardBody([
-            html.H3("float64", style={"color": "#C0392B", "fontWeight": "800",
+            html.H3("float64", style={"color": "#FAF5F4", "fontWeight": "800",
                 "textAlign": "center", "fontFamily": "'Poppins', sans-serif"}),
             html.P("tipo de dato original", style={"textAlign": "center", "color": "#ffffff",
                 "fontSize": "0.85rem", "marginBottom": "0"})
