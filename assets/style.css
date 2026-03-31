@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+/* Fondo general */
+body {
+    background-color: #0d1b2a;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Títulos de sección */
+.section-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    border-left: 5px solid #C0392B;
+    padding-left: 14px;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Subtítulos */
+.section-subtitle {
+    color: #adb5bd;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1.2rem;
+    margin-bottom: 0.6rem;
+}
+
+/* Cards */
+.card {
+    background-color: #162032 !important;
+    border: 1px solid #1e3a5f !important;
+    border-radius: 10px !important;
+}
+
+.card-body {
+    color: #e0e0e0;
+}
+
+/* Texto de párrafos */
+.eda-text {
+    color: #c9d1d9;
+    font-size: 0.97rem;
+    line-height: 1.75;
+    text-align: justify;
+}
+
+/* Divider */
+.divider {
+    border-top: 1px solid #1e3a5f;
+    margin: 2rem 0;
+}
+
+/* Navbar link hover */
+.nav-link:hover {
+    color: #C0392B !important;
+}
+
+/* Accordion oscuro */
+.accordion-dark .accordion-button {
+    background-color: #0D1B2E !important;
+    color: #ffffff !important;
+    border: 1px solid #1e3a5f !important;
+}
+
+.accordion-dark .accordion-button:not(.collapsed) {
+    background-color: #162032 !important;
+    border-left: 4px solid #C0392B !important;
+}
+
+.accordion-dark .accordion-body {
+    background-color: #0D1B2E !important;
+    border: 1px solid #1e3a5f !important;
+    color: #cbd5e1 !important;
+}
+
+.accordion-dark .accordion-item {
+    border: none !important;
+    margin-bottom: 0.5rem !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+/* Dropdown opciones oscuras */
+.VirtualizedSelectOption {
+    background-color: #0D1B2E !important;
+    color: #cbd5e1 !important;
+}
+
+.VirtualizedSelectFocusedOption {
+    background-color: #162032 !important;
+    color: #ffffff !important;
+}
+
+.Select-menu-outer {
+    background-color: #0D1B2E !important;
+    border: 1px solid #1e3a5f !important;
+}
+
+.Select-option {
+    background-color: #0D1B2E !important;
+    color: #cbd5e1 !important;
+}
+
+.Select-option:hover, .Select-option.is-focused {
+    background-color: #162032 !important;
+    color: #ffffff !important;
+}
+
+.Select-option.is-selected {
+    background-color: #1e3a5f !important;
+    color: #ffffff !important;
+}
