@@ -83,26 +83,43 @@ body {
 }
 /* Dropdown opciones oscuras */
 /* ── Dropdown fix universal ── */
-.Select-control {
+/* ── Dropdown fix completo ── */
+.Select-control,
+.Select-control:hover,
+.is-open .Select-control,
+.is-focused .Select-control,
+.is-focused:not(.is-open) .Select-control {
     background-color: #0D1B2E !important;
     border-color: #1e3a5f !important;
+    color: #cbd5e1 !important;
+    box-shadow: none !important;
 }
 
+.Select-value,
 .Select-value-label {
     color: #cbd5e1 !important;
+    background-color: #0D1B2E !important;
 }
 
 .Select-placeholder {
     color: #94a3b8 !important;
 }
 
+.Select-input,
 .Select-input input {
     color: #cbd5e1 !important;
+    background-color: transparent !important;
 }
 
-.Select-menu-outer {
+.Select-arrow {
+    border-color: #94a3b8 transparent transparent !important;
+}
+
+.Select-menu-outer,
+.Select-menu {
     background-color: #0D1B2E !important;
     border: 1px solid #1e3a5f !important;
+    color: #cbd5e1 !important;
 }
 
 .Select-option {
@@ -110,7 +127,8 @@ body {
     color: #cbd5e1 !important;
 }
 
-.Select-option:hover, .Select-option.is-focused {
+.Select-option:hover,
+.Select-option.is-focused {
     background-color: #162032 !important;
     color: #ffffff !important;
 }
@@ -118,20 +136,6 @@ body {
 .Select-option.is-selected {
     background-color: #1e3a5f !important;
     color: #ffffff !important;
-}
-
-/* Para versiones nuevas de Dash */
-.dash-dropdown .Select-control {
-    background-color: #0D1B2E !important;
-}
-
-.dash-dropdown input {
-    color: #cbd5e1 !important;
-    background-color: #0D1B2E !important;
-}
-
-.dash-dropdown .Select-value-label {
-    color: #cbd5e1 !important;
 }
 
 .VirtualizedSelectOption {
@@ -142,4 +146,14 @@ body {
 .VirtualizedSelectFocusedOption {
     background-color: #162032 !important;
     color: #ffffff !important;
+}
+
+/* Para versiones nuevas de Dash */
+.dash-dropdown > div {
+    background-color: #0D1B2E !important;
+    border-color: #1e3a5f !important;
+}
+
+.dash-dropdown input {
+    color: #cbd5e1 !important;
 }
