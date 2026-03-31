@@ -144,7 +144,7 @@ layout = dbc.Container([
                         value="Objetivo",
                         clearable=False,
                         className="dark-dropdown",
-                        
+                        style=DD_STYLE
                     ),
                 ], md=4),
                 dbc.Col([
