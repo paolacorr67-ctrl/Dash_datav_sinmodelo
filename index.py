@@ -15,6 +15,7 @@ navbar = dbc.NavbarSimple(
         dbc.NavItem(dbc.NavLink("Limpieza",       href="/limpieza")),
         dbc.NavItem(dbc.NavLink("Resultados",     href="/resultados")),
         dbc.NavItem(dbc.NavLink("Síntesis",       href="/sintesis")),
+        dbc.NavItem(dbc.NavLink("Modelo",         href="/modelo")),
         dbc.NavItem(dbc.NavLink("Referencias",    href="/referencias")),
     ],
     brand="",

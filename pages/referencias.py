@@ -16,8 +16,8 @@ CARD_STYLE = {
 referencias = [
     {
         "titulo": "Heart Disease Health Indicators Dataset — BRFSS 2015",
-        "detalle": "Alex Teboul · Kaggle · 2022",
-        "url": "https://www.kaggle.com/datasets/alexteboul/heart-disease-health-indicators-dataset/data",
+        "detalle": "Alex Teboul · Kaggle · 2021",
+        "url": "https://www.kaggle.com/datasets/alexteboul/heart-disease-health-indicators-dataset",
     },
     {
         "titulo": "Behavioral Risk Factor Surveillance System (BRFSS) — 2015",
@@ -30,14 +30,79 @@ referencias = [
         "url": "https://www.cdc.gov/heartdisease/facts.htm",
     },
     {
-        "titulo": "Exploratory Data Analysis",
-        "detalle": "John W. Tukey · Addison-Wesley Publishing Company · 1977",
-        "url": "https://www.worldcat.org/title/exploratory-data-analysis/oclc/3058187",
+        "titulo": "Americans under 55 dying of severe heart attacks",
+        "detalle": "American Heart Association · Journal of the American Heart Association · 2024",
+        "url": "https://www.ahajournals.org",
     },
     {
-        "titulo": "Heart Failure: Pathophysiology and Diagnosis",
-        "detalle": "Braunwald, E. · Journal of Internal Medicine · 2013",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/23121664/",
+        "titulo": "Ataque cardíaco: Información general",
+        "detalle": "Texas Heart Institute · s.f.",
+        "url": "https://www.texasheart.org/heart-health/heart-information-center/topics/ataque-cardiaco/",
+    },
+    {
+        "titulo": "Heart disease risk factors",
+        "detalle": "National Heart, Lung, and Blood Institute · s.f.",
+        "url": "https://www.nhlbi.nih.gov",
+    },
+    {
+        "titulo": "Insuficiencia cardíaca",
+        "detalle": "MSD Manuals · s.f.",
+        "url": "https://www.msdmanuals.com/es/hogar/trastornos-del-corazón",
+    },
+    {
+        "titulo": "Exploratory Data Analysis (EDA)",
+        "detalle": "IBM Think / John W. Tukey · 1977-2024",
+        "url": "https://www.ibm.com/mx-es/think/topics/exploratory-data-analysis",
+    },
+    {
+        "titulo": "¿Qué es el algoritmo de k vecinos más cercanos (KNN)?",
+        "detalle": "IBM · s.f.",
+        "url": "https://www.ibm.com/mx-es/think/topics/knn",
+    },
+    {
+        "titulo": "¿Qué es un Random Forest?",
+        "detalle": "IBM · s.f.",
+        "url": "https://www.ibm.com/mx-es/think/topics/random-forest",
+    },
+    {
+        "titulo": "¿Qué es una Máquina de Vectores de Soporte (SVM)?",
+        "detalle": "IBM · s.f.",
+        "url": "https://www.ibm.com/es-es/think/topics/support-vector-machine",
+    },
+    {
+        "titulo": "¿Qué es la Regresión Logística?",
+        "detalle": "IBM · s.f.",
+        "url": "https://www.ibm.com/es-es/think/topics/logistic-regression",
+    },
+    {
+        "titulo": "¿Qué es XGBoost?",
+        "detalle": "IBM · s.f.",
+        "url": "https://www.ibm.com/es-es/think/topics/xgboost",
+    },
+    {
+        "titulo": "Clasificación con datos desbalanceados",
+        "detalle": "Aprende Machine Learning · s.f.",
+        "url": "https://www.aprendemachinelearning.com/clasificacion-con-datos-desbalanceados/",
+    },
+    {
+        "titulo": "Validación cruzada K-fold estratificada",
+        "detalle": "GeeksforGeeks · 2025",
+        "url": "https://www.geeksforgeeks.org/stratified-k-fold-cross-validation/",
+    },
+    {
+        "titulo": "¿Qué es un pipeline de machine learning?",
+        "detalle": "IBM · s.f.",
+        "url": "https://www.ibm.com/es-es/think/topics/machine-learning-pipeline",
+    },
+    {
+        "titulo": "AUC y la curva ROC en aprendizaje automático",
+        "detalle": "DataCamp · 2024",
+        "url": "https://www.datacamp.com/tutorial/auc",
+    },
+    {
+        "titulo": "Threshold tuning and monitoring",
+        "detalle": "IBM · 2026",
+        "url": "https://www.ibm.com/docs/en/omegamon-for-storage",
     },
     {
         "titulo": "SciPy: Open Source Scientific Tools for Python",
@@ -55,7 +120,6 @@ referencias = [
         "url": "https://pandas.pydata.org/",
     },
 ]
-
 layout = dbc.Container([
 
     dbc.Row([
