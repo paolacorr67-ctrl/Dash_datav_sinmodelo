@@ -13,7 +13,6 @@ import os
 
 dash.register_page(__name__, path="/modelo", name="Modelo Predictivo")
 
-# ── Paleta ────────────────────────────────────────────────────────────────────
 BG_PAGE     = "#070E1A"
 BG_CARD     = "#0D1B2E"
 BG_CARD_ALT = "#111827"
