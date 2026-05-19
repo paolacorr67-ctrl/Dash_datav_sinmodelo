@@ -46,20 +46,20 @@ PLOT_BASE = dict(
 
 # ── Datos ─────────────────────────────────────────────────────────────────────
 modelos = pd.DataFrame([
-    {"Modelo": "XGBoost",           "Accuracy": 0.7351, "Precision": 0.2376,
+    {"Modelo": "XGBoost",       "Accuracy": 0.7351, "Precision": 0.2376,
      "Recall": 0.8209, "F1": 0.3686, "AUC-ROC": 0.8483, "Recall CV": 0.8197},
-    {"Modelo": "Random Forest",     "Accuracy": 0.7237, "Precision": 0.2288,
+    {"Modelo": "Random Forest", "Accuracy": 0.7237, "Precision": 0.2288,
      "Recall": 0.8157, "F1": 0.3574, "AUC-ROC": 0.8373, "Recall CV": 0.8102},
-    {"Modelo": "Logistic Reg.",     "Accuracy": 0.7502, "Precision": 0.2458,
+    {"Modelo": "Logistic Reg.", "Accuracy": 0.7502, "Precision": 0.2458,
      "Recall": 0.7991, "F1": 0.3760, "AUC-ROC": 0.8459, "Recall CV": 0.7960},
-    {"Modelo": "KNeighbors",        "Accuracy": 0.8815, "Precision": 0.2944,
+    {"Modelo": "KNeighbors",    "Accuracy": 0.8815, "Precision": 0.2944,
      "Recall": 0.1846, "F1": 0.2269, "AUC-ROC": 0.6690, "Recall CV": 0.1947},
-    {"Modelo": "Linear SVC",        "Accuracy": 0.9070, "Precision": 0.5262,
+    {"Modelo": "Linear SVC",    "Accuracy": 0.9070, "Precision": 0.5262,
      "Recall": 0.1241, "F1": 0.2008, "AUC-ROC": 0.8460, "Recall CV": 0.1290},
 ])
 
 reduccion = pd.DataFrame([
-    {"Modelo": "XGBoost completo (21 vars)", "Variables": 21,
+    {"Modelo": "XGBoost completo (21 vars)",  "Variables": 21,
      "Recall": 0.8209, "Precision": 0.2376, "F1": 0.3686, "AUC-ROC": 0.8483},
     {"Modelo": "XGBoost reducido A (16 vars)", "Variables": 16,
      "Recall": 0.8209, "Precision": 0.2376, "F1": 0.3686, "AUC-ROC": 0.8483},
@@ -68,7 +68,7 @@ reduccion = pd.DataFrame([
 ])
 
 vars_eliminadas = {
-    "Importancia = 0": ["Veggies", "PhysActivity", "Fruits", "Education", "AnyHealthcare"],
+    "Importancia = 0":     ["Veggies", "PhysActivity", "Fruits", "Education", "AnyHealthcare"],
     "Importancia < 0.003": ["CholCheck", "BMI", "NoDocbcCost", "MentHlth"],
 }
 
@@ -76,7 +76,58 @@ vars_finales = ["HighBP", "GenHlth", "HighChol", "Age", "DiffWalk",
                 "Sex", "Stroke", "Smoker", "Diabetes", "PhysHlth",
                 "Income", "HvyAlcoholConsump"]
 
-# ── Gráfica 1: Comparación de modelos — Recall y AUC-ROC ─────────────────────
+# ── Matrices de confusión (datos hardcodeados del notebook) ──────────────────
+cms = {
+    "Logistic Reg.": {"TN": 34242, "FP": 11715, "FN": 960,  "TP": 3819},
+    "Random Forest":  {"TN": 32819, "FP": 13138, "FN": 881,  "TP": 3898},
+    "KNeighbors":     {"TN": 43843, "FP": 2114,  "FN": 3897, "TP": 882},
+    "Linear SVC":     {"TN": 45423, "FP": 534,   "FN": 4186, "TP": 593},
+    "XGBoost":        {"TN": 33372, "FP": 12585, "FN": 856,  "TP": 3923},
+}
+
+def make_cm_figure(nombre, vals):
+    z     = [[vals["TN"], vals["FP"]],
+             [vals["FN"], vals["TP"]]]
+    text  = [[f"TN<br>{vals['TN']:,}", f"FP<br>{vals['FP']:,}"],
+             [f"FN<br>{vals['FN']:,}", f"TP<br>{vals['TP']:,}"]]
+
+    fig = go.Figure(go.Heatmap(
+        z=z,
+        text=text,
+        texttemplate="%{text}",
+        colorscale=[[0, BG_CARD_ALT], [0.3, "#7B241C"], [1, ACCENT]],
+        showscale=False,
+        xgap=3, ygap=3,
+        textfont=dict(color=TEXT_PRI, family=FONT, size=11)
+    ))
+    fig.update_layout(
+        paper_bgcolor=BG_CARD,
+        plot_bgcolor=BG_CARD,
+        font=dict(color=TEXT_MUT, family="Poppins", size=12),
+        margin=dict(t=50, b=50, l=60, r=20),
+        height=260,
+        title=dict(
+            text=nombre,
+            font=dict(color=TEXT_PRI, size=13, family=FONT),
+            x=0.5
+        ),
+        xaxis=dict(
+            tickvals=[0, 1],
+            ticktext=["Sin HD", "Con HD"],
+            color=TEXT_SEC,
+            title=dict(text="Prediccion", font=dict(size=11, color=TEXT_SEC))
+        ),
+        yaxis=dict(
+            tickvals=[0, 1],
+            ticktext=["Sin HD", "Con HD"],
+            color=TEXT_SEC,
+            autorange="reversed",
+            title=dict(text="Real", font=dict(size=11, color=TEXT_SEC))
+        ),
+    )
+    return fig
+
+# ── Gráfica 1: Comparación de modelos ────────────────────────────────────────
 fig_comp = go.Figure()
 colors_bar = [ACCENT if m == "XGBoost" else BLUE for m in modelos["Modelo"]]
 
@@ -106,15 +157,13 @@ fig_comp.update_layout(
     yaxis=dict(gridcolor=BORDER, color=TEXT_SEC, title="Recall",
                range=[0, 1.15]),
     yaxis2=dict(overlaying="y", side="right", color=GOLD,
-                title="AUC-ROC", range=[0.5, 1.0],
-                showgrid=False),
+                title="AUC-ROC", range=[0.5, 1.0], showgrid=False),
     legend=dict(bgcolor=BG_CARD, bordercolor=BORDER, borderwidth=1,
                 font=dict(color=TEXT_MUT)),
-    height=380,
-    barmode="group",
+    height=380, barmode="group",
 )
 
-# ── Gráfica 2: Tabla comparativa modelos ─────────────────────────────────────
+# ── Gráfica 2: Tabla comparativa ──────────────────────────────────────────────
 header_vals = ["Modelo", "Accuracy", "Precision", "Recall", "F1", "AUC-ROC", "Recall CV"]
 cell_vals   = [
     modelos["Modelo"].tolist(),
@@ -130,19 +179,13 @@ row_colors = [
 ] * len(header_vals)
 
 fig_tabla = go.Figure(go.Table(
-    header=dict(
-        values=header_vals,
-        fill_color=BORDER,
-        font=dict(color=TEXT_PRI, family=FONT, size=12),
-        align="center", height=36
-    ),
-    cells=dict(
-        values=cell_vals,
-        fill_color=row_colors,
-        font=dict(color=TEXT_MUT, family=FONT, size=12),
-        align="center", height=32,
-        line=dict(color=BORDER, width=1)
-    )
+    header=dict(values=header_vals, fill_color=BORDER,
+                font=dict(color=TEXT_PRI, family=FONT, size=12),
+                align="center", height=36),
+    cells=dict(values=cell_vals, fill_color=row_colors,
+               font=dict(color=TEXT_MUT, family=FONT, size=12),
+               align="center", height=32,
+               line=dict(color=BORDER, width=1))
 ))
 fig_tabla.update_layout(
     paper_bgcolor=BG_CARD,
@@ -152,14 +195,12 @@ fig_tabla.update_layout(
 
 # ── Gráfica 3: Reducción de variables ────────────────────────────────────────
 fig_red = go.Figure()
-metrics  = ["Recall", "F1", "AUC-ROC"]
-pal      = [ACCENT, GOLD, "#4A6FA5"]
+metrics = ["Recall", "F1", "AUC-ROC"]
+pal     = [ACCENT, GOLD, "#4A6FA5"]
 
-for i, (met, col) in enumerate(zip(metrics, pal)):
+for met, col in zip(metrics, pal):
     fig_red.add_trace(go.Bar(
-        name=met,
-        x=reduccion["Modelo"],
-        y=reduccion[met],
+        name=met, x=reduccion["Modelo"], y=reduccion[met],
         marker_color=col,
         text=[f"{v:.4f}" for v in reduccion[met]],
         textposition="outside",
@@ -170,12 +211,10 @@ fig_red.update_layout(
     title=dict(text="Comparacion de versiones XGBoost por numero de variables",
                font=dict(color=TEXT_PRI, size=14, family=FONT), x=0),
     xaxis=dict(gridcolor=BORDER, color=TEXT_SEC),
-    yaxis=dict(gridcolor=BORDER, color=TEXT_SEC, title="Metrica",
-               range=[0, 1.1]),
+    yaxis=dict(gridcolor=BORDER, color=TEXT_SEC, title="Metrica", range=[0, 1.1]),
     legend=dict(bgcolor=BG_CARD, bordercolor=BORDER, borderwidth=1,
                 font=dict(color=TEXT_MUT)),
-    barmode="group",
-    height=380,
+    barmode="group", height=380,
 )
 
 # ── Helpers UI ────────────────────────────────────────────────────────────────
@@ -188,15 +227,13 @@ def metric_card(label, value, color=TEXT_PRI, highlight=False):
                                   "letterSpacing": "0.8px"}),
             html.H4(value, style={"color": TEXT_PRI, "fontWeight": "800",
                                    "fontFamily": FONT, "marginBottom": "0"})
-        ]), style={**CARD_STYLE,
-                   "borderColor": ACCENT if highlight else BORDER}),
+        ]), style={**CARD_STYLE, "borderColor": ACCENT if highlight else BORDER}),
         md=3, className="mb-3"
     )
 
 def section_title(text):
     return html.H4(text, style={"color": TEXT_PRI, "fontFamily": FONT,
                                  "fontWeight": "700", "marginBottom": "0.3rem"})
-
 
 # ── Layout ────────────────────────────────────────────────────────────────────
 layout = dbc.Container([
@@ -209,7 +246,7 @@ layout = dbc.Container([
         html.Hr(style={"borderColor": BORDER, "marginTop": "1rem"}),
     ])], className="mt-4"),
 
-    # ── SECCION 1: Comparacion de modelos ────────────────────────────────────
+    # ── SECCION 1: Comparacion de modelos ─────────────────────────────────────
     dbc.Row([dbc.Col([
         section_title("1. Comparacion de modelos"),
         html.P("Se entrenaron cinco algoritmos con validacion cruzada estratificada "
@@ -220,22 +257,19 @@ layout = dbc.Container([
                style={**SUBTITLE_STYLE, "marginBottom": "1.5rem"}),
     ])]),
 
-    # Tarjetas métricas XGBoost
     dbc.Row([
-        metric_card("Recall",    "0.8209", ACCENT,  highlight=True),
+        metric_card("Recall",    "0.8209", ACCENT, highlight=True),
         metric_card("AUC-ROC",   "0.8483", GOLD),
         metric_card("F1-Score",  "0.3686", "#4A6FA5"),
         metric_card("Recall CV", "0.8197", TEXT_PRI),
     ]),
 
-    # Tabla completa
     dbc.Row([dbc.Col([
         dbc.Card(dbc.CardBody([
             dcc.Graph(figure=fig_tabla, config={"displayModeBar": False})
         ]), style=CARD_STYLE)
     ])], className="mb-4"),
 
-    # Grafica barras
     dbc.Row([
         dbc.Col([
             dbc.Card(dbc.CardBody([
@@ -270,16 +304,80 @@ layout = dbc.Container([
 
     html.Hr(style={"borderColor": BORDER}),
 
-    # ── SECCION 2: Reduccion de variables ────────────────────────────────────
+    # ── SECCION 2: Matrices de confusion ──────────────────────────────────────
     dbc.Row([dbc.Col([
-        section_title("2. Reduccion a 12 variables"),
+        section_title("2. Matrices de confusion por modelo"),
+        html.P("Las matrices de confusion permiten visualizar el comportamiento "
+               "de cada modelo frente a los casos positivos y negativos. "
+               "En este problema, los falsos negativos (FN) son el error mas "
+               "critico: representan pacientes enfermos que el modelo no detecto.",
+               style={**SUBTITLE_STYLE, "marginBottom": "1.5rem"}),
+    ])]),
+
+    dbc.Row([
+        dbc.Col([
+            dbc.Card(dbc.CardBody([
+                dcc.Graph(figure=make_cm_figure("XGBoost", cms["XGBoost"]),
+                          config={"displayModeBar": False})
+            ]), style={**CARD_STYLE, "borderColor": ACCENT})
+        ], md=4, className="mb-3"),
+        dbc.Col([
+            dbc.Card(dbc.CardBody([
+                dcc.Graph(figure=make_cm_figure("Random Forest", cms["Random Forest"]),
+                          config={"displayModeBar": False})
+            ]), style=CARD_STYLE)
+        ], md=4, className="mb-3"),
+        dbc.Col([
+            dbc.Card(dbc.CardBody([
+                dcc.Graph(figure=make_cm_figure("Logistic Reg.", cms["Logistic Reg."]),
+                          config={"displayModeBar": False})
+            ]), style=CARD_STYLE)
+        ], md=4, className="mb-3"),
+    ]),
+
+    dbc.Row([
+        dbc.Col([
+            dbc.Card(dbc.CardBody([
+                dcc.Graph(figure=make_cm_figure("KNeighbors", cms["KNeighbors"]),
+                          config={"displayModeBar": False})
+            ]), style=CARD_STYLE)
+        ], md=4, className="mb-3"),
+        dbc.Col([
+            dbc.Card(dbc.CardBody([
+                dcc.Graph(figure=make_cm_figure("Linear SVC", cms["Linear SVC"]),
+                          config={"displayModeBar": False})
+            ]), style=CARD_STYLE)
+        ], md=4, className="mb-3"),
+        dbc.Col([
+            dbc.Card(dbc.CardBody([
+                html.H6("Interpretacion", style={"color": TEXT_PRI,
+                    "fontFamily": FONT, "fontWeight": "700",
+                    "marginBottom": "1rem",
+                    "borderBottom": f"1px solid {BORDER}",
+                    "paddingBottom": "0.5rem"}),
+                html.P("XGBoost registro el menor numero de falsos negativos (856)"
+                       "entre todos los modelos evaluados, detectando 3.923 de los"
+                       "4.779 casos positivos reales en el conjunto de test.",
+                       style={**TEXT_STYLE, "marginBottom": "1rem"}),
+                html.P("Random Forest obtuvo resultados similares (FN: 881, TP: 3.898), "
+                       "pero con un AUC-ROC inferior (0.837 vs 0.848),lo que indica "
+                       "menor capacidad discriminatoria global.",
+                       style={**TEXT_STYLE, "marginBottom": "1rem"}),           
+            ]), style={**CARD_STYLE, "height": "100%"})
+        ], md=4, className="mb-3"),
+    ], style={"alignItems": "stretch"}),
+
+    html.Hr(style={"borderColor": BORDER, "marginTop": "1rem"}),
+
+    # ── SECCION 3: Reduccion de variables ─────────────────────────────────────
+    dbc.Row([dbc.Col([
+        section_title("3. Reduccion a 12 variables"),
         html.P("Con el objetivo de construir un modelo mas parsimonioso sin "
                "sacrificar capacidad predictiva, se analizo la importancia de "
                "variables del XGBoost entrenado con las 21 variables del dataset.",
                style={**SUBTITLE_STYLE, "marginBottom": "1.5rem"}),
     ])]),
 
-    # Cards variables eliminadas
     dbc.Row([
         dbc.Col([
             dbc.Card(dbc.CardBody([
@@ -335,7 +433,6 @@ layout = dbc.Container([
         ], md=6, className="mb-3"),
     ]),
 
-    # Grafica reduccion
     dbc.Row([
         dbc.Col([
             dbc.Card(dbc.CardBody([
@@ -363,7 +460,6 @@ layout = dbc.Container([
         ], md=5),
     ], className="mb-4", style={"alignItems": "stretch"}),
 
-    # Variables finales seleccionadas
     dbc.Row([dbc.Col([
         dbc.Card(dbc.CardBody([
             html.P("12 VARIABLES SELECCIONADAS", style={"color": TEXT_SEC,
@@ -384,14 +480,11 @@ layout = dbc.Container([
                     "textAlign": "center",
                     "marginBottom": "8px",
                     "display": "inline-block",
-                    "flex": "1 1 160 px"
                 }) for v in vars_finales
             ])
         ]), style={**CARD_STYLE, "borderLeft": f"3px solid {ACCENT}"})
     ])], className="mb-5"),
 
     html.Hr(style={"borderColor": BORDER}),
-
-   
 
 ], fluid=True, style={"padding": "2rem 3rem", "backgroundColor": BG_PAGE})

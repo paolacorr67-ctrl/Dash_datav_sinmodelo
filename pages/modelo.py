@@ -78,11 +78,18 @@ VARS_META = {
         "options": [{"label": "No", "value": 0}, {"label": "Si", "value": 1}],
     },
     "Age": {
-        "label": "Rango de edad",
-        "type": "slider",
-        "min": 1, "max": 13, "step": 1,
-        "marks": {1: "18-24", 4: "30-34", 7: "45-49",
-                  10: "60-64", 13: "80+"},
+    "label": "Rango de edad",
+    "type": "slider",
+    "min": 1, "max": 13, "step": 1,
+    "marks": {
+        1:  "18–24",
+        3:  "30–34",
+        5:  "40–44",
+        7:  "50–54",
+        9:  "60–64",
+        11: "70–74",
+        13: "80+"
+        },
     },
     "DiffWalk": {
         "label": "Dificultad para caminar o subir escaleras",

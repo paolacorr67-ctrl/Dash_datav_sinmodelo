@@ -108,7 +108,7 @@ def make_card(obj):
             }),
 
             dbc.Button(
-                "Ver más ↓",
+                "Ver menos ↑",
                 id=f"btn-{obj['id']}",
                 size="sm",
                 style={
@@ -144,7 +144,7 @@ def make_card(obj):
                 "marginTop": "2px"
             }),
             id=f"collapse-{obj['id']}",
-            is_open=False
+            is_open=True
         )
     ], md=6, className="mb-4")
 
@@ -217,6 +217,6 @@ for obj in especificos:
         prevent_initial_call=True
     )
     def toggle_collapse(n, obj_id=obj["id"]):
-        is_open = n % 2 != 0
+        is_open = n % 2 == 0
         label = "Ver menos ↑" if is_open else "Ver más ↓"
         return is_open, label

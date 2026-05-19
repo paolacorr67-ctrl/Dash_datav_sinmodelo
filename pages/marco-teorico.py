@@ -136,7 +136,7 @@ def make_collapsible(item, prefix):
                 "fontSize": "0.95rem",
                 "flexGrow": "1"
             }),
-            html.Span("▼", id={"type": f"arrow-{prefix}", "index": item["id"]}, style={
+            html.Span("▲", id={"type": f"arrow-{prefix}", "index": item["id"]}, style={
                 "color": "#94a3b8",
                 "fontSize": "0.8rem"
             }),
@@ -181,7 +181,7 @@ def make_collapsible(item, prefix):
                 "marginBottom": "0.5rem"
             }),
             id={"type": f"collapse-{prefix}", "index": item["id"]},
-            is_open=False
+            is_open=True
         )
     ])
 
@@ -235,7 +235,6 @@ layout = dbc.Container([
 ], fluid=True, style={"padding": "2rem 3rem", "backgroundColor": "#070E1A"})
 
 
-# Callback temas — cuando uno abre, los demás se cierran
 @callback(
     Output({"type": "collapse-tema", "index": ALL}, "is_open"),
     Output({"type": "arrow-tema", "index": ALL}, "children"),
@@ -245,27 +244,26 @@ layout = dbc.Container([
 def toggle_temas(n_clicks):
     triggered = ctx.triggered_id
     if not triggered:
-        return [False] * len(temas), ["▼"] * len(temas)
+        return [True] * len(temas), ["▲"] * len(temas)
 
     ids = [t["id"] for t in temas]
     clicked = triggered["index"]
+    idx_clicked = ids.index(clicked)
 
     is_open_list = []
     arrow_list = []
-    for tid in ids:
+    for i, tid in enumerate(ids):
         if tid == clicked:
-            idx = ids.index(tid)
-            currently_open = n_clicks[idx] % 2 != 0
+            currently_open = n_clicks[idx_clicked] % 2 == 0
             is_open_list.append(currently_open)
             arrow_list.append("▲" if currently_open else "▼")
         else:
-            is_open_list.append(False)
-            arrow_list.append("▼")
+            is_open_list.append(True)
+            arrow_list.append("▲")
 
     return is_open_list, arrow_list
 
 
-# Callback métricas — cuando una abre, las demás se cierran
 @callback(
     Output({"type": "collapse-met", "index": ALL}, "is_open"),
     Output({"type": "arrow-met", "index": ALL}, "children"),
@@ -275,21 +273,21 @@ def toggle_temas(n_clicks):
 def toggle_metricas(n_clicks):
     triggered = ctx.triggered_id
     if not triggered:
-        return [False] * len(metricas), ["▼"] * len(metricas)
+        return [True] * len(metricas), ["▲"] * len(metricas)
 
     ids = [m["id"] for m in metricas]
     clicked = triggered["index"]
+    idx_clicked = ids.index(clicked)
 
     is_open_list = []
     arrow_list = []
-    for mid in ids:
+    for i, mid in enumerate(ids):
         if mid == clicked:
-            idx = ids.index(mid)
-            currently_open = n_clicks[idx] % 2 != 0
+            currently_open = n_clicks[idx_clicked] % 2 == 0
             is_open_list.append(currently_open)
             arrow_list.append("▲" if currently_open else "▼")
         else:
-            is_open_list.append(False)
-            arrow_list.append("▼")
+            is_open_list.append(True)
+            arrow_list.append("▲")
 
     return is_open_list, arrow_list

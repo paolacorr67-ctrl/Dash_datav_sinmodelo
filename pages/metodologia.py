@@ -126,7 +126,7 @@ def make_collapsible(item, prefix):
                 "fontSize": "0.95rem",
                 "flexGrow": "1"
             }),
-            html.Span("▼", id={"type": f"arrow-{prefix}", "index": item["id"]}, style={
+            html.Span("▲", id={"type": f"arrow-{prefix}", "index": item["id"]}, style={
                 "color": "#94a3b8",
                 "fontSize": "0.8rem"
             }),
@@ -170,7 +170,7 @@ def make_collapsible(item, prefix):
                 "marginBottom": "0.5rem"
             }),
             id={"type": f"collapse-{prefix}", "index": item["id"]},
-            is_open=False
+            is_open=True
         )
     ])
 
@@ -242,21 +242,21 @@ layout = dbc.Container([
 def toggle_univariado(n_clicks):
     triggered = ctx.triggered_id
     if not triggered:
-        return [False] * len(univariado), ["▼"] * len(univariado)
+        return [True] * len(univariado), ["▲"] * len(univariado)
 
     ids = [u["id"] for u in univariado]
     clicked = triggered["index"]
+    idx_clicked = ids.index(clicked)
 
     is_open_list, arrow_list = [], []
     for uid in ids:
         if uid == clicked:
-            idx = ids.index(uid)
-            currently_open = n_clicks[idx] % 2 != 0
+            currently_open = n_clicks[idx_clicked] % 2 == 0
             is_open_list.append(currently_open)
             arrow_list.append("▲" if currently_open else "▼")
         else:
-            is_open_list.append(False)
-            arrow_list.append("▼")
+            is_open_list.append(True)
+            arrow_list.append("▲")
 
     return is_open_list, arrow_list
 
@@ -271,20 +271,20 @@ def toggle_univariado(n_clicks):
 def toggle_bivariado(n_clicks):
     triggered = ctx.triggered_id
     if not triggered:
-        return [False] * len(bivariado), ["▼"] * len(bivariado)
+        return [True] * len(bivariado), ["▲"] * len(bivariado)
 
     ids = [b["id"] for b in bivariado]
     clicked = triggered["index"]
+    idx_clicked = ids.index(clicked)
 
     is_open_list, arrow_list = [], []
     for bid in ids:
         if bid == clicked:
-            idx = ids.index(bid)
-            currently_open = n_clicks[idx] % 2 != 0
+            currently_open = n_clicks[idx_clicked] % 2 == 0
             is_open_list.append(currently_open)
             arrow_list.append("▲" if currently_open else "▼")
         else:
-            is_open_list.append(False)
-            arrow_list.append("▼")
+            is_open_list.append(True)
+            arrow_list.append("▲")
 
     return is_open_list, arrow_list

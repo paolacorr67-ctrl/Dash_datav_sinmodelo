@@ -128,38 +128,39 @@ layout = dbc.Container([
     
     # Iconos Watch video + About us
     dbc.Row([
+        
 
-        # YouTube
-        # dbc.Col([
-        #     html.A([
-        #         html.Img(
-        #             src="/assets/youtube-svgrepo-com.svg",
-        #             style={
-        #                 "width": "48px",
-        #                 "height": "48px",
-        #                 "filter": "brightness(0) invert(1)"
-        #             }
-        #         ),
-        #         html.P("Watch video",
-        #             style={
-        #                 "color": "#E7E9EC",
-        #                 "fontSize": "0.88rem",
-        #                 "marginTop": "0.5rem",
-        #                 "marginBottom": "0",
-        #                 "fontFamily": "'Poppins', sans-serif"
-        #             })
-        #     ],
-        #     href="https://youtu.be/Exgc-QKA22Q?list=RDExgc-QKA22Q",
-        #     target="_blank",
-        #     style={
-        #         "textDecoration": "none",
-        #         "textAlign": "center",
-        #         "display": "flex",
-        #         "flexDirection": "column",
-        #         "alignItems": "center",
-        #         "cursor": "pointer"
-        #     })
-        # ], md=2, style={"display": "flex", "justifyContent": "center"}),
+        #YouTube
+         dbc.Col([
+             html.A([
+                 html.Img(
+                     src="/assets/youtube-svgrepo-com.svg",
+                     style={
+                         "width": "48px",
+                         "height": "48px",
+                         "filter": "brightness(0) invert(1)"
+                     }
+                 ),
+                 html.P("Watch video",
+                     style={
+                         "color": "#E7E9EC",
+                         "fontSize": "0.88rem",
+                         "marginTop": "0.5rem",
+                         "marginBottom": "0",
+                         "fontFamily": "'Poppins', sans-serif"
+                     })
+             ],
+             href="",
+             target="_blank",
+             style={
+                 "textDecoration": "none",
+                 "textAlign": "center",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "alignItems": "center",
+                 "cursor": "pointer"
+             })
+        ], md=2, style={"display": "flex", "justifyContent": "center"}),
         
         dbc.Col([
             html.A([
