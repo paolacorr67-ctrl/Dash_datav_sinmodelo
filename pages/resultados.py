@@ -321,33 +321,69 @@ def make_bivariado_chart(var):
 
 
 def make_correlation_heatmap():
-    corr = df.select_dtypes(include="number").corr()
-    target_corr = corr[target_var].drop(target_var).sort_values()
-    colors = ["#C0392B" if v > 0 else "#2C3E6B" for v in target_corr.values]
+    from scipy.stats import chi2_contingency
+    from scipy.stats.contingency import association
 
-    fig = go.Figure(go.Bar(
-        x=target_corr.values,
-        y=target_corr.index,
+    scores = []
+
+    for v in binary_vars + ordinal_vars:
+        ct = pd.crosstab(df[v], df[target_var])
+        chi2, _, _, _ = chi2_contingency(ct)
+        n = ct.values.sum()
+        cramer = np.sqrt(chi2 / (n * (min(ct.shape) - 1)))
+        scores.append({"Variable": v, "Score": round(cramer, 4), "Tipo": "cat"})
+
+    for v in continuous_vars:
+        r = abs(df[[v, target_var]].corr().loc[v, target_var])
+        scores.append({"Variable": v, "Score": round(r, 4), "Tipo": "cont"})
+
+    df_scores = pd.DataFrame(scores).sort_values("Score", ascending=True)
+
+    colors = []
+    for s in df_scores["Score"]:
+        if s > 0.15:
+            colors.append("#C0392B")
+        elif s > 0.08:
+            colors.append("#E8A838")
+        else:
+            colors.append("#2C3E6B")
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=df_scores["Score"],
+        y=df_scores["Variable"],
         orientation="h",
         marker=dict(color=colors, line=dict(color="#0D1B2E", width=0.5)),
-        text=[f"{v:.3f}" for v in target_corr.values],
+        text=[f"{v:.4f}" for v in df_scores["Score"]],
         textposition="outside",
         textfont=dict(color="#cbd5e1", size=10),
     ))
+
+    fig.add_vline(x=0.15, line_dash="dash", line_color="#C0392B",
+                  annotation_text="Alta (>0.15)",
+                  annotation_font_color="#C0392B",
+                  annotation_position="top right")
+    fig.add_vline(x=0.08, line_dash="dash", line_color="#E8A838",
+                  annotation_text="Moderada (>0.08)",
+                  annotation_font_color="#E8A838",
+                  annotation_position="top right")
+
     fig.update_layout(
         paper_bgcolor="#0D1B2E", plot_bgcolor="#0D1B2E",
         font=dict(color="#cbd5e1", family="Poppins", size=12),
-        margin=dict(t=50, b=50, l=160, r=80),
-        title=dict(text="Correlación de Pearson con HeartDiseaseorAttack",
-                   font=dict(color="#ffffff", size=14, family="Poppins"), x=0),
-        xaxis=dict(gridcolor="#1e3a5f", color="#94a3b8", title="Correlación (r)",
-                   zeroline=True, zerolinecolor="#ffffff", zerolinewidth=1.5,
-                   range=[target_corr.min() * 1.3, target_corr.max() * 1.3]),
+        margin=dict(t=70, b=50, l=160, r=80),
+        title=dict(
+            text="Ranking de asociación con HeartDiseaseorAttack<br>",
+                 
+            font=dict(color="#ffffff", size=14, family="Poppins"), x=0
+        ),
+        xaxis=dict(gridcolor="#1e3a5f", color="#94a3b8",
+                   title="Score de asociación",
+                   range=[0, df_scores["Score"].max() * 1.25]),
         yaxis=dict(gridcolor="#1e3a5f", color="#94a3b8"),
-        height=520, showlegend=False,
+        height=580, showlegend=False,
     )
     return fig
-
 
 def compute_stats(var):
     vtype = get_var_type(var)
@@ -498,7 +534,9 @@ layout = dbc.Container([
     # ── CORRELACIÓN ─────────────────────────────────────────────────────────
     dbc.Row([
         dbc.Col([
-            html.H4("Correlación de Pearson con la variable objetivo", style={
+            html.H4("Ranking de asociación con la variable objetivo",
+                    "V de Cramér para variables categóricas y ordinales, |r| de Pearson para continuas.",
+                    style={
                 "color": "#ffffff", "fontFamily": "'Poppins', sans-serif",
                 "fontWeight": "700", "marginBottom": "0.3rem"
             }),
