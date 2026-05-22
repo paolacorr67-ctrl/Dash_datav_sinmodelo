@@ -150,7 +150,7 @@ layout = dbc.Container([
                          "fontFamily": "'Poppins', sans-serif"
                      })
              ],
-             href="",
+             href="https://youtu.be/43CdwjrhgLE",
              target="_blank",
              style={
                  "textDecoration": "none",
