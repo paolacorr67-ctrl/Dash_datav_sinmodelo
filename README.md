@@ -130,5 +130,6 @@ La versión utilizada fue publicada en Kaggle por Alex Teboul.
 # Equipo
 Este proyecto fue desarrollado por:
 
-Natalia Alvarado — [GitHub](https://github.com/paolacorr67-ctrl)
-Camilo Mujica — [GitHub](https://github.com/camilo0709)
+* Natalia Alvarado — [GitHub](https://github.com/paolacorr67-ctrl)
+
+* Camilo Mujica — [GitHub](https://github.com/camilo0709)
