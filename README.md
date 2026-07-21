@@ -2,19 +2,21 @@
 
 ![Dashboard](assets/screenshot.png)
 
-## Descripción
+# Análisis exploratorio y modelado predictivo de enfermedades cardíacas — BRFSS 2015
 
-Este proyecto presenta un análisis exploratorio de datos (EDA) sobre los factores conductuales, clínicos y sociodemográficos asociados al riesgo de enfermedad cardíaca en adultos estadounidenses, utilizando la encuesta BRFSS 2015 del CDC. El análisis fue desarrollado como un dashboard interactivo construido con Python y la librería Dash.
+Este proyecto presenta un análisis exploratorio de datos (EDA) y un modelo predictivo sobre los factores conductuales, clínicos y sociodemográficos asociados al riesgo de enfermedad cardíaca en adultos estadounidenses, utilizando la encuesta BRFSS 2015 del CDC. El análisis fue desarrollado como un dashboard interactivo construido con Python y la librería Dash, e incluye la comparación de cinco algoritmos de clasificación supervisada con selección del mejor modelo.
 
-El dataset empleado contiene 253.680 registros y 22 variables que incluyen indicadores como el índice de masa corporal, actividad física, tabaquismo, consumo de alcohol, presión arterial, colesterol, diabetes, acceso a atención médica y características sociodemográficas.
+El dataset empleado contiene **253.680 registros** y **22 variables** que incluyen indicadores como el índice de masa corporal, actividad física, tabaquismo, consumo de alcohol, presión arterial, colesterol, diabetes, acceso a atención médica y características sociodemográficas.
 
-## Estructura del proyecto
+---
 
-```
+# Estructura del proyecto
+
+```text
 EDA_heart-cop-copia/
-├── assets/          ← Estilos CSS e íconos SVG
-├── docs/            ← Dataset CSV y notebook original
-├── pages/           ← Páginas del dashboard
+├── assets/          # Estilos CSS e íconos SVG
+├── docs/            # Dataset CSV y notebook original que tiene como nombre "Eda12.ipynb"
+├── pages/
 │   ├── home.py
 │   ├── objetivos.py
 │   ├── marco_teorico.py
@@ -22,6 +24,8 @@ EDA_heart-cop-copia/
 │   ├── carga.py
 │   ├── limpieza.py
 │   ├── resultados.py
+│   ├── metricas.py
+│   ├── modelo.py
 │   ├── sintesis.py
 │   └── referencias.py
 ├── app.py
@@ -29,60 +33,135 @@ EDA_heart-cop-copia/
 └── requirements.txt
 ```
 
-## Cómo correr el dashboard localmente
+---
 
-El dashboard fue desarrollado en Python usando la librería Dash. Para poder correrlo necesitas tener **Python 3.9 o superior** instalado en tu computador.
+# Contenido del dashboard
 
-**1. Descomprime el archivo**
+| Sección | Descripción |
+|----------|-------------|
+| Inicio | Contexto del problema y estadísticas clave del dataset |
+| Objetivos | Objetivo general y cinco objetivos específicos del análisis |
+| Marco teórico | Conceptos fundamentales y métricas estadísticas utilizadas |
+| Metodología | Estrategias aplicadas en el análisis univariado y bivariado |
+| Carga de datos | Inspección inicial, tipos de variables y diccionario de datos |
+| Limpieza | Verificación de nulos, duplicados y rangos esperados por variable |
+| Resultados | Análisis univariado, bivariado, correlaciones e interacciones sinérgicas |
+| Métricas del modelo | Comparación de cinco clasificadores, matrices de confusión y reducción de variables |
+| Modelo predictivo | Formulario interactivo para estimar la probabilidad individual de enfermedad cardíaca |
+| Síntesis | Conclusiones finales y hallazgos principales |
+| Referencias | Fuentes bibliográficas en formato APA |
 
-Extrae el archivo comprimido en la ubicación que prefieras de tu computador.
+---
 
-**2. (Opcional pero recomendado) Crea un entorno virtual**
+# Modelo predictivo
+
+Se entrenaron y compararon cinco algoritmos de clasificación supervisada:
+
+- Regresión Logística
+- Random Forest
+- K-Nearest Neighbors (KNN)
+- Linear Support Vector Classifier (Linear SVC)
+- XGBoost
+
+El modelo final seleccionado fue **XGBoost**, obteniendo:
+
+- **Recall:** 0.8223
+- **AUC-ROC:** 0.8482
+- **Variables utilizadas:** 12 de las 21 originales
+- **Estrategia para el desbalance:** `scale_pos_weight = 9.62`
+- **Hiperparámetros:**
+  - `learning_rate = 0.05`
+  - `max_depth = 3`
+  - `n_estimators = 100`
+  - `subsample = 1.0`
+
+### Variables seleccionadas
+
+- HighBP
+- GenHlth
+- HighChol
+- Age
+- DiffWalk
+- Sex
+- Stroke
+- Smoker
+- Diabetes
+- PhysHlth
+- Income
+- HvyAlcoholConsump
+
+---
+
+# Cómo ejecutar el proyecto
+
+## 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/TU-USUARIO/EDA_heart-cop-copia.git
+cd EDA_heart-cop-copia
+```
+
+## 2. Crear un entorno virtual (opcional)
 
 ```bash
 python -m venv venv
 ```
 
-Actívalo:
+Activarlo:
+
+**Windows**
 
 ```bash
-# Windows
 venv\Scripts\activate
+```
 
-# Mac / Linux
+**Mac/Linux**
+
+```bash
 source venv/bin/activate
 ```
 
-**3. Instala las dependencias**
+## 3. Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**4. Corre la aplicación**
+## 4. Ejecutar la aplicación
 
 ```bash
 python index.py
 ```
 
-**5. Abre el dashboard en tu navegador**
+## 5. Abrir el dashboard
+
+En el navegador visita:
 
 ```
 http://localhost:8050/
 ```
 
-> **Nota:** El archivo `heart_disease_health_indicators_BRFSS2015.csv` debe estar dentro de la carpeta `docs/`. No lo elimines ni lo muevas. La terminal debe permanecer abierta mientras uses el dashboard.
+> **Importante:** El archivo `heart_disease_health_indicators_BRFSS2015.csv` debe permanecer dentro de la carpeta `docs/`.
 
-## Dataset
+---
 
-Los datos provienen del **Behavioral Risk Factor Surveillance System (BRFSS) 2015**, administrado por el CDC. La versión depurada utilizada en este proyecto fue publicada en Kaggle por Alex Teboul.
+# Dataset
 
-- [Ver dataset en Kaggle](https://www.kaggle.com/datasets/alexteboul/heart-disease-health-indicators-dataset/data)
-- [Ver fuente original CDC](https://www.cdc.gov/brfss/annual_data/annual_2015.html)
+Los datos provienen del **Behavioral Risk Factor Surveillance System (BRFSS) 2015**, administrado por los **Centers for Disease Control and Prevention (CDC)**.
 
-## Equipo
+La versión utilizada fue publicada en Kaggle por Alex Teboul.
+
+- Dataset en Kaggle: https://www.kaggle.com/datasets/alexteboul/heart-disease-health-indicators-dataset/data
+- Fuente original del CDC: https://www.cdc.gov/brfss/annual_data/annual_2015.html
+
+---
+
+# Equipo
 
 Este proyecto fue desarrollado por:
 
-- **Natalia Alvarado** — [GitHub](https://github.com/paolacorr67-ctrl)
-- **Camilo Mujica** — [GitHub](https://github.com/camilo0709)
+- **Natalia Alvarado**  
+  GitHub: https://github.com/paolacorr67-ctrl
+
+- **Camilo Mujica**  
+  GitHub: https://github.com/camilo0709
