@@ -8,14 +8,14 @@ Este proyecto presenta un análisis exploratorio de datos (EDA) y un modelo pred
 
 El dataset empleado contiene **253.680 registros** y **22 variables** que incluyen indicadores como el índice de masa corporal, actividad física, tabaquismo, consumo de alcohol, presión arterial, colesterol, diabetes, acceso a atención médica y características sociodemográficas.
 
----
+
 
 # Estructura del proyecto
 
 ```text
 EDA_heart-cop-copia/
 ├── assets/          # Estilos CSS e íconos SVG
-├── docs/            # Dataset CSV y notebook original que tiene como nombre "Eda12.ipynb"
+├── docs/            # Dataset CSV y notebook original que tiene como nombre "eda12.ipynb"
 ├── pages/
 │   ├── home.py
 │   ├── objetivos.py
@@ -33,7 +33,6 @@ EDA_heart-cop-copia/
 └── requirements.txt
 ```
 
----
 
 # Contenido del dashboard
 
@@ -51,7 +50,7 @@ EDA_heart-cop-copia/
 | Síntesis | Conclusiones finales y hallazgos principales |
 | Referencias | Fuentes bibliográficas en formato APA |
 
----
+
 
 # Modelo predictivo
 
@@ -63,34 +62,7 @@ Se entrenaron y compararon cinco algoritmos de clasificación supervisada:
 - Linear Support Vector Classifier (Linear SVC)
 - XGBoost
 
-El modelo final seleccionado fue **XGBoost**, obteniendo:
 
-- **Recall:** 0.8223
-- **AUC-ROC:** 0.8482
-- **Variables utilizadas:** 12 de las 21 originales
-- **Estrategia para el desbalance:** `scale_pos_weight = 9.62`
-- **Hiperparámetros:**
-  - `learning_rate = 0.05`
-  - `max_depth = 3`
-  - `n_estimators = 100`
-  - `subsample = 1.0`
-
-### Variables seleccionadas
-
-- HighBP
-- GenHlth
-- HighChol
-- Age
-- DiffWalk
-- Sex
-- Stroke
-- Smoker
-- Diabetes
-- PhysHlth
-- Income
-- HvyAlcoholConsump
-
----
 
 # Cómo ejecutar el proyecto
 
@@ -143,7 +115,6 @@ http://localhost:8050/
 
 > **Importante:** El archivo `heart_disease_health_indicators_BRFSS2015.csv` debe permanecer dentro de la carpeta `docs/`.
 
----
 
 # Dataset
 
@@ -154,7 +125,7 @@ La versión utilizada fue publicada en Kaggle por Alex Teboul.
 - Dataset en Kaggle: https://www.kaggle.com/datasets/alexteboul/heart-disease-health-indicators-dataset/data
 - Fuente original del CDC: https://www.cdc.gov/brfss/annual_data/annual_2015.html
 
----
+
 
 # Equipo
 
