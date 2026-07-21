@@ -122,8 +122,9 @@ Los datos provienen del **Behavioral Risk Factor Surveillance System (BRFSS) 201
 
 La versión utilizada fue publicada en Kaggle por Alex Teboul.
 
-- Dataset en Kaggle - [Link] (https://www.kaggle.com/datasets/alexteboul/heart-disease-health-indicators-dataset/data)
-- Fuente original del CDC  - [Link] (https://www.cdc.gov/brfss/annual_data/annual_2015.html)
+- Dataset en Kaggle - [Link](https://www.kaggle.com/datasets/alexteboul/heart-disease-health-indicators-dataset/data)
+
+- Fuente original del CDC - [Link](https://www.cdc.gov/brfss/annual_data/annual_2015.html)
 
 
 
